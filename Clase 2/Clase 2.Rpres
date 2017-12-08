@@ -20,7 +20,7 @@ type: prompt
 
 La reproducibilidad se refiere a la capacidad que tenga una prueba o experimento de ser reproducido o replicado por otros, en particular, por la comunidad cientifica.
 
-![](./reproducible.jpg)
+![](./imagenes/reproducible.jpg)
 
 R Markdown
 ========================================================

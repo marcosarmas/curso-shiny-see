@@ -22,16 +22,16 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Historia de R
 
-<img src="./historia R.jpg" align="center" width="700">
+<img src="./imagenes/historia R.jpg" align="center" width="700">
 
 ## [R Project](https://www.r-project.org/)
 
-<img src="./R Project.png" width="700" >
-<img src="./Rcmd.png" width="400" >
+<img src="./imagenes/R Project.png" width="700" >
+<img src="./imagenes/Rcmd.png" width="400" >
 
 ## [R Studio](https://www.rstudio.com/)
 
-<img src="./R Studio.png" width="700" >
+<img src="./imagenes/R Studio.png" width="700" >
 
 ## Productos de datos con R y R Studio
 
@@ -73,13 +73,13 @@ hchart(x)
 
 ## GitHub y Markdown
 <br><br>
-<img src='./github.png' width="700">
+<img src='./imagenes/github.png' width="700">
 
 ## Markdown 
-<img src='./cheatsheet.jpg' width="700">
+<img src='./imagenes/cheatsheet.jpg' width="700">
 
 ## R Markdown
-<img src='./chunks.png' width="700">
+<img src='./imagenes/chunks.png' width="700">
 
 # Talleres
 

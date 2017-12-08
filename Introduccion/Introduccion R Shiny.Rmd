@@ -29,6 +29,10 @@ R User Group Ecuador | Sociedad Ecuatoriana de Estadistica
 
 Marcos Armas
 
+marcos.armas@gmail.com
+
+<a href="https://www.linkedin.com/in/marcosarmas/"> <img src="./images/ln.png" width="30"></a> <a href="https://github.com/marcosarmas"><img src="./images/gh.png" width="30"></a>
+
 ```{r echo=FALSE }
 library(timevis)
 data <- data.frame(
@@ -54,6 +58,8 @@ timevis(data = data,
         options = list(margin = list(item = 30, axis = 50)))
 
 ```
+
+
 
 ## Agenda
 
@@ -94,6 +100,15 @@ timevis(data = data,
 * Shiny Apps
 * RPubs
 
+## Recursos
+
+Las presentaciones estaran disponibles en RPubs
+
+- [RPubs](http://rpubs.com/marcosarmas)
+
+Código fuente y demás recursos en GitHub
+
+- [GitHub](https://github.com/marcosarmas/curso-shiny-see)
 
 ## Reglas
 
