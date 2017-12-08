@@ -1,0 +1,252 @@
+---
+title: "Clase 2"
+subtitle: "Investigación Reproducible con Markdown"
+author: "Marcos Armas"
+date: "6 de diciembre de 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Aprendiendo Highcharter y Plotly
+
+## Accidentes de tránsito en Ecuador
+
+A continuación realizamos un estudio de estadistica descriptiva a la base de datos de accidentes de tránsito del 2015 a nivel nacional provisto por el INEC
+
+Para integrar R con Markdown se utiliza un chunk (pedazo de código), aquí colocaremos todos el código R tal cual sería para demostrar el experimiento realizado, la ventaja esta en que se detalla tanto el tratamiento de datos como el experimento en si: utilizar un algoritmo, simulación, etc.
+
+El chunk acepta algunos parámetros en los cuales indicaremos si se debe mostrar el código, si se quiere mostrar el resultado, si se desea mostrar los mensajes de consola de R, warnings, etc.
+
+* echo = FALSE: Evita mostrar el código R
+* include = FALSE: permite ejecutar el código pero no muestra ni el codigo ni el resultado
+* message = FALSE: oculta los mensajes generados por el código en consola
+* warning = FALSE: oculta los warmings generados por el código en consola
+* fig.cap = "": agrega un mensaje al pie de la figura
+
+
+```{r echo=TRUE}
+accidentes2015 <- read.csv('./2015_AccidentesTránsitoBDD.csv')
+summary(accidentes2015)
+```
+
+## Graficando con Highcharter
+
+Causas más comunes de accidentes que dejan personas fallecidas.
+
+```{r echo=TRUE}
+
+library(highcharter)
+
+causas <- aggregate(NUM_FALLECIDO ~ CAUSA, accidentes2015, sum)
+
+hchart(causas, "column", hcaes(x = CAUSA, y = NUM_FALLECIDO))
+
+```
+
+Las provincias de Guayas y Pichincha son las que tienen mayor número de accidentes
+
+```{r echo=TRUE}
+
+library(highcharter)
+
+provincias <- aggregate(NUM_FALLECIDO ~ PROVINCIA, accidentes2015, sum)
+provincias <- provincias[order(-provincias$NUM_FALLECIDO),]
+highchart() %>%
+  hc_title(text="Número de fallecidos por provincia")%>%
+  hc_chart(type="bar") %>%
+  hc_xAxis(categories = provincias$PROVINCIA) %>%
+  hc_add_series(provincias$NUM_FALLECIDO, name="Provincias") 
+
+```
+
+Distribución de victimas por causa del accidente
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+
+hcboxplot(x=accidentes2015$TOTAL_VICTIMAS, var=accidentes2015$CAUSA)
+
+```
+
+## Función highchart() paso a paso
+
+La funcion highchart inicializa el gráfico, con %>% vamos agregando las opciones que queremos visualizar, series, categorias, colores, etc.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+
+library(reshape)
+
+#agregamos número de lesionados por mes y por zona
+zonas <- aggregate(NUM_LESIONADO ~ MES + ZONA, accidentes2015, sum )
+
+#pivoteamos mes a filas, zonas a columnas
+zonas <- cast(zonas, MES ~ ZONA, sum)
+
+#ordenamos los meses
+mes.nombre <- c("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre")
+zonas$MES = factor(zonas$MES, levels = mes.nombre)
+zonas = zonas[order(zonas$MES),]
+
+# guardamos el gráfico en el objeto hc para poder modificarlo luego
+
+hc <- highchart() %>% 
+  # hc_xAxis detallamos las opciones para el eje x, la variable a enviar debe ser una categórica
+  hc_xAxis(categories = zonas$MES) %>% 
+  # una serie es una variable numÃ©rica continua, en este caso agregaremos 2
+  hc_add_series(name = "Urbano", data = zonas$URBANA) %>% 
+  hc_add_series(name = "Rural", data = zonas$RURAL)
+
+# para graficar solamente ejecutamos el objeto hc
+
+hc
+```
+
+La función hc_chart permite agregar opciones generales como colores, aspecto y leyendas
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+
+
+
+hc %>% 
+  # borderColor: color del borde del recuadro
+  hc_chart(borderColor = '#EBBA95',
+           # borderRadius para redondear las esquinas del recuardo
+           borderRadius = 10,
+           # borderWidth el espesor de la línea
+           borderWidth = 2,
+           # backgroundColor solido se envia un color, en gradiente un conjunto de colores
+           backgroundColor = list(
+             linearGradient = c(0, 0, 500, 500),
+             stops = list(
+               list(0, 'rgb(255, 255, 255)'),
+               list(1, 'rgb(200, 200, 255)')
+             )))
+
+
+
+```
+
+Para cambiar el tipo de gráfico utilizamos la funcion hc_chart indicando el nuevo tipo.
+
+```{r message=FALSE, warning=FALSE}
+
+hc <- hc %>%
+  hc_chart(type = 'column')
+
+hc
+
+```
+
+Volvemos al gráfico de líneas
+
+```{r message=FALSE, warning=FALSE}
+
+hc <- hc_chart(hc, type = "line")
+
+hc
+```
+
+Colores, con hc_colors podemos embellecer nuestros gráficos
+
+[Paletas de colores en R](https://www.r-bloggers.com/palettes-in-r/)
+
+```{r message=FALSE, warning=FALSE}
+
+library("viridisLite")
+
+cols <- viridis(2)
+cols <- substr(cols, 0, 7)
+
+cols 
+
+hc %>% 
+  hc_colors(cols)
+
+```
+
+```{r message=FALSE, warning=FALSE}
+
+cols <- rainbow(2)
+
+cols 
+
+hc %>% 
+  hc_colors(cols)
+
+```
+
+Ejes, lineas de grilla, mover el eje.
+
+hc_xAxis y hc_yAxis
+
+```{r message=FALSE, warning=FALSE}
+
+hc %>% 
+  hc_xAxis(title = list(text = "Meses"),
+           #poner el eje en el lado opuesto
+           opposite = TRUE,
+           #agregar una línea constante
+           plotLines = list(
+             list(label = list(text = "Constante"),
+                  color = "#FF0000",
+                  width = 2,
+                  value = 5.5))) %>% 
+  hc_yAxis(title = list(text = "Número de afectados"),
+           opposite = TRUE,
+           minorTickInterval = "auto",
+           minorGridLineDashStyle = "LongDashDotDot",
+           #mostrar la primera etiqueta
+           showFirstLabel = FALSE,
+           #mostrar la ultima etiqueta
+           showLastLabel = FALSE,
+           #agregar una banda de área
+           plotBands = list(
+             list(from = 1400, to = JS("Infinity"), color = "rgba(100, 0, 0, 0.1)",
+                  label = list(text = "Ãrea")))) 
+
+```
+
+Eliminando series
+
+```{r message=FALSE, warning=FALSE}
+
+hc %>%
+  hc_rm_series(name = "Rural")
+
+```
+
+Agregando color al área
+
+```{r message=FALSE, warning=FALSE}
+
+hc %>%
+  hc_add_series(name = "Rural", data = zonas$RURAL, type="area") 
+
+```
+
+Varios tipos de gráficos
+
+```{r message=FALSE, warning=FALSE}
+
+hc %>%
+  hc_add_series(name = "Rural", data = zonas$RURAL, type="bar") 
+
+```
+
+# Ahora con Plotly
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(plotly)
+plot_ly(accidentes2015, x=accidentes2015$TOTAL_VICTIMAS ,color=accidentes2015$CAUSA, type='box')
+
+```
+
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+accidentes2015<-accidentes2015[order(-accidentes2015$TOTAL_VICTIMAS),]
+plot_ly(accidentes2015, x = accidentes2015$CAUSA, y = accidentes2015$NUM_LESIONADO, type = 'bar', name = 'Lesionados') %>%
+  add_trace(y = accidentes2015$NUM_FALLECIDO, name = 'Fallecidos') %>%
+  layout(yaxis = list(title = 'Count'), barmode = 'stack')
+```

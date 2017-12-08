@@ -1,0 +1,88 @@
+html, body {
+  background-color: #fff;
+  color: #000;
+}
+
+a:link {
+  color: #f442cb;
+}
+
+a:visited {
+  color: #f77016; 
+}
+img {
+  max-width: 70%;
+}
+h1 {
+	font-family: "Arial";
+	font-size: 24px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.4px;
+}
+h3 {
+	font-family: "Arial";
+	font-size: 24px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	text-decoration: underline;
+	line-height: 26.4px;
+}
+p {
+	font-family: "Arial";
+	font-size: 18px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 20px;
+}
+blockquote {
+	font-family: "Arial";
+	font-size: 21px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 30px;
+}
+pre {
+	font-family: "Arial";
+	font-size: 13px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 18.5714px;
+}
+
+img {
+	display: center;
+	margin: 0 auto;
+}
+
+li{
+	font-family: "Arial";
+	font-size: 22px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 20px;
+}
+
+table{
+	margin-top: 200px;
+	margin-left: 200px;
+}
+
+th{
+	font-family: "Arial";
+	font-size: 18px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 20px;
+}
+
+tr{
+	text-align: center;
+}

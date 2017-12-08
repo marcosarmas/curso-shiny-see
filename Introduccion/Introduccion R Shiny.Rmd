@@ -1,0 +1,110 @@
+---
+title: "Introduccion R Shiny"
+author: "Marcos Armas"
+date: "5 de diciembre de 2017"
+
+output: 
+  slidy_presentation:
+    fig_width: 7
+    fig_height: 6
+    fig_caption: true
+    css: style.css
+    
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Organizadores
+
+R User Group Ecuador | Sociedad Ecuatoriana de Estadistica
+--- | --- 
+![](./images/ruge.png)|![](./images/see.jpg)
+
+
+
+## Acerca de mi
+
+Marcos Armas
+
+```{r echo=FALSE }
+library(timevis)
+data <- data.frame(
+  id      = 1:7,
+  content = c("ESPE - Ing. En Sistemas", "UBA - Maestria Data Mining",
+              "SSP - DataLife"  , "HP"  ,"BP - SAS", "MIN-AM", "Handytec"),
+  start   = c("2003-10-01", "2014-04-01",
+              "2009-02-01", "2014-07-22", "2015-01-01", "2016-06-01", "2016-10-15"),
+  end     = c("2008-08-31", "2015-12-22",
+              "2014-01-31", "2014-12-23", "2016-04-15", "2016-10-01", "2018-01-01"),
+  group   = c(rep("acad",2), rep("lab",5))
+)
+
+groups <- data.frame(
+  id = c("acad","lab"),
+  content = c("Academia", "Laboral")
+)
+
+timevis(data = data, 
+        groups = groups, 
+        zoomFactor = 2, 
+        width = 1200,
+        options = list(margin = list(item = 30, axis = 50)))
+
+```
+
+## Agenda
+
+### Clase 1:
+
+*	R y R studio
+*	Productos de datos
+*	Git Hub - Markdown
+
+### Clase 2:
+
+*	Investigación Reproducible con Markdown
+*	R presentations
+
+
+### Clase 3:
+
+*	Aplicaciones web con Shiny
+*	Construyamos nuestra primera app
+
+### Clase 4:
+
+*	Reactive user interfaces
+
+### Clase 5:
+
+*	Gráficos animados
+
+### Clase 6:
+
+*	Integración con bases de datos
+
+### Clase 7:
+
+*	Compartiendo nuestras obras de arte con el mundo
+* Github
+* Shiny Server
+* Shiny Apps
+* RPubs
+
+
+## Reglas
+
+* Todos aprendemos (incluido el profe)
+* Prohibido celulares 
+* Prohibido dormirse
+
+## Horarios
+
+* Llegamos 18:00 Iniciamos 18:10
+* Salimos 21:00
+* Lunes 11 a miércoles 13 
+* Lunes 18 a jueves 21
+
