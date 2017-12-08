@@ -2,3 +2,5 @@
 */rsconnect/
 *.pdf
 .Rproj.user
+*.RData
+*.Rhistory

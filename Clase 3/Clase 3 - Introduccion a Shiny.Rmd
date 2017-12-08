@@ -255,10 +255,10 @@ dateInput | Seleccion de una fecha
 dateRangeInput | Seleccion de un par de fechas 
 fileInput | Subir un archivo
 helpText | Texto de ayuda para otro control
-numericInput | Campo para insertar un dato numérico
+numericInput | Campo para insertar un dato numÃ©rico
 radioButtons | Un grupo de radio buttons
 selectInput | Clasica caja con opciones para seleccionar
-sliderInput | Control para seleccionar un dato númerico 
+sliderInput | Control para seleccionar un dato numérico 
 submitButton | Un boton de submit
 textInput | Campo para ingresar un dato de texto
 
