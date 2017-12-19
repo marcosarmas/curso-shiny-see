@@ -88,7 +88,10 @@ zonas <- cast(zonas, MES ~ ZONA, sum)
 mes.nombre <- c("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre")
 zonas$MES = factor(zonas$MES, levels = mes.nombre)
 zonas = zonas[order(zonas$MES),]
+```
 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
 # guardamos el gráfico en el objeto hc para poder modificarlo luego
 
 hc <- highchart() %>% 
@@ -111,16 +114,16 @@ La función hc_chart permite agregar opciones generales como colores, aspecto y 
 
 hc %>% 
   # borderColor: color del borde del recuadro
-  hc_chart(borderColor = '#EBBA95',
+  hc_chart(borderColor = '#f7baa1',
            # borderRadius para redondear las esquinas del recuardo
            borderRadius = 10,
            # borderWidth el espesor de la línea
            borderWidth = 2,
            # backgroundColor solido se envia un color, en gradiente un conjunto de colores
            backgroundColor = list(
-             linearGradient = c(0, 0, 500, 500),
+             linearGradient = c(500, 500, 0, 0),
              stops = list(
-               list(0, 'rgb(255, 255, 255)'),
+               list(0, 'rgb(0, 0, 0)'),
                list(1, 'rgb(200, 200, 255)')
              )))
 
@@ -191,8 +194,8 @@ hc %>%
            plotLines = list(
              list(label = list(text = "Constante"),
                   color = "#FF0000",
-                  width = 2,
-                  value = 5.5))) %>% 
+                  width = 4,
+                  value = 6))) %>% 
   hc_yAxis(title = list(text = "Número de afectados"),
            opposite = TRUE,
            minorTickInterval = "auto",
@@ -204,7 +207,7 @@ hc %>%
            #agregar una banda de área
            plotBands = list(
              list(from = 1400, to = JS("Infinity"), color = "rgba(100, 0, 0, 0.1)",
-                  label = list(text = "Ãrea")))) 
+                  label = list(text = "Área")))) 
 
 ```
 

@@ -1,0 +1,148 @@
+Clase 4 
+========================================================
+author: Marcos Armas
+date: 18 de Diciembre del 2017
+autosize: true
+transition: zoom
+
+Reactive user interfaces<br>
+![](./imagenes/01_hello.png)
+
+Programación reactiva
+========================================================
+
+Shiny tiene 3 tipos de programación reactiva
+
+![](./imagenes/roles.png)
+
+* Source reactive: son todos los inputs
+* Reactive conductors: funciones
+* Reactive endpoints: outputs
+
+Aplicación sencilla
+========================================================
+
+<img src="./imagenes/01_hello.png" width="400">
+
+Es aquella que tiene un input y llama a un output
+
+Ejemplo
+========================================================
+
+```{r eval=FALSE}
+ui <- fluidPage(
+   titlePanel("Old Faithful Geyser Data"),
+   sidebarLayout(
+      sidebarPanel(
+         ...
+      ),
+      mainPanel(
+         plotOutput("distPlot")
+      )
+   )
+)
+  
+```
+
+***
+
+```{r eval=FALSE}
+server <- function(input, output) {
+  output$distPlot <- renderPlot({
+    hist(rnorm(input$obs))
+  })
+}
+```
+
+Multiples outputs
+===
+
+![](./imagenes/faithful.png)
+
+Un imput puede afectar a multiples outputs.
+
+Ejemplo
+===
+
+```{r eval=FALSE}
+server <- function(input, output) {
+  output$plotOut <- renderPlot({
+    hist(faithful$eruptions, breaks = as.numeric(input$nBreaks))
+    if (input$individualObs)
+      rug(faithful$eruptions)
+  })
+
+  output$tableOut <- renderTable({
+    if (input$individualObs)
+      faithful
+    else
+      NULL
+  })
+}
+```
+
+Conductores Reactivos
+===
+incremental: true
+
+Los conductores reactivos nos ayudan a reutilizar código eficientemente.
+
+Ejemplo: si debemos hacer un cálculo complicado cuyo resultado afecta a 2 outputs.
+
+Ejemplo fibonacci (no hacer esto)
+===
+incremental: true
+
+Calcular el n número en la secuencia fibonacci y su inversa.
+
+```{r eval=FALSE}
+# Calculate nth number in Fibonacci sequence
+fib <- function(n) ifelse(n<3, 1, fib(n-1)+fib(n-2))
+
+server <- function(input, output) {
+  output$nthValue    <- renderText({ fib(as.numeric(input$n)) })
+  output$nthValueInv <- renderText({ 1 / fib(as.numeric(input$n)) })
+}
+```
+
+Estructura programa anterior
+===
+
+<img src="./imagenes/fib_no_conductor.png" width="400px">
+
+
+Ejemplo conductor reactivo (OK)
+===
+
+```{r eval=FALSE}
+fib <- function(n) ifelse(n<3, 1, fib(n-1)+fib(n-2))
+
+server <- function(input, output) {
+  currentFib         <- reactive({ fib(as.numeric(input$n)) })
+
+  output$nthValue    <- renderText({ currentFib() })
+  output$nthValueInv <- renderText({ 1 / currentFib() })
+}
+```
+
+Estructura
+===
+
+<img src="./imagenes/conductor.png" width="400"> 
+
+Aplicaciones para los Conductores Reactivos
+===
+
+Vamos a utilizarlos para: 
+
+* Acceder a una base de datos
+* Leer datos de un archivo
+* Descargar datos de la red
+* Realizar cálculos complejos
+
+
+Implementaciones 
+===
+
+<img src="./imagenes/roles_implement.png" width="800">
+

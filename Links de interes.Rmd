@@ -1,0 +1,25 @@
+---
+title: "Links de interes"
+author: "Marcos Armas"
+date: "12 de diciembre de 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Unanse al lado obscuro *"Grupo de Usuarios de R - Ecuador"*
+
+<https://chat.whatsapp.com/LUWnAo7HJiN1CpOstF9s67>
+
+## R Presentations 
+
+### Transiciones 
+
+<https://support.rstudio.com/hc/en-us/articles/200714013-Slide-Transitions-and-Navigation>
+
+
+
+
+
