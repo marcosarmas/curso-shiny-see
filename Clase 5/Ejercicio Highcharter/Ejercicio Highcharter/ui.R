@@ -28,7 +28,7 @@ shinyUI(fluidPage(
 
     # Show a plot of the generated distribution
     mainPanel(
-      highcartOutput("timeline")
+      highchartOutput("timeline")
     )
   )
 ))

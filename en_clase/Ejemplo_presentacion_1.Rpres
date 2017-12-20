@@ -1,0 +1,45 @@
+Ejemplo_presentacion_1
+========================================================
+author: Marcos Armas
+date: 12-12-2017
+autosize: true
+transition: zoom
+transition-speed: fast
+navigation: section
+
+Introducción
+========================================================
+type: section
+
+Ejemplo con código en R
+========================================================
+
+```{r}
+summary(cars)
+
+```
+Numeración
+========================================================
+
+1. A
+1. B
+1. C
+
+Lista
+========================================================
+
+- item 1
+- item 2
+- item 3
+
+Gráfico
+========================================================
+
+![Votaciones por condado en EEUU](./imagenes/map3.png)
+
+Slide With Plot
+========================================================
+
+```{r, echo=FALSE}
+plot(cars)
+```

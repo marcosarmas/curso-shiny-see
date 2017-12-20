@@ -1,0 +1,73 @@
+---
+title: "Ejemplo 1"
+author: "Marcos Armas"
+date: "11 de diciembre de 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Título
+
+<!-- regular html comment --> 
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+
+When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:_
+
+1. Item 1
+2. Item 2
+1. Sub item 1
+2. Item 3
+
+<div style="text-align: center;">
+  ![Foto bonita](./imagenes/map3.png)
+</div>
+
+\# Hola mundo
+
+![Desde url](https://i.stack.imgur.com/EcF5L.png)
+
+> Aqui va una cita, algo que dijo otra persona.
+
+# R Chunks
+
+```{r cars, echo=FALSE}
+summary(cars)
+```
+
+```{r, message=FALSE, warning=FALSE}
+  
+datos <- read.csv("./2015_AccidentesTransitoBDD.csv")
+
+summary(datos)
+```
+
+
+```{r}
+library(highcharter)
+
+causas <- aggregate(NUM_FALLECIDO ~ CAUSA, datos, sum)
+
+hchart(causas, "column", hcaes(x = CAUSA, y = NUM_FALLECIDO))
+
+```
+
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+  plot(pressure)
+```
+
+
+
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

@@ -1,0 +1,29 @@
+---
+title: "Aprendiendo Highcharter"
+author: "Marcos Armas"
+date: "12 de diciembre de 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Análisis de accidentes de tránsito
+
+```{r}
+  accidentes2015 <- read.csv('./2015_AccidentesTransitoBDD.csv')
+  summary(accidentes2015)
+```
+1. Agregamos la libreria highcharter
+
+```{r, message=FALSE, warning=FALSE}
+library(highcharter)
+```
+
+```{r}
+causas <- aggregate(NUM_FALLECIDO ~ CAUSA, accidentes2015, sum)
+
+hchart(causas, "line", hcaes(x = CAUSA, y = NUM_FALLECIDO))
+```
+

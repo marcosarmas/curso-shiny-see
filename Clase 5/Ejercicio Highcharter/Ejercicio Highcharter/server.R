@@ -13,14 +13,15 @@ shinyServer(function(input, output, session) {
   getData <- reactive({
     nacidos <- read.csv("./ENV_2016.csv")
     provincias <- split(levels(nacidos$prov_nac), levels(nacidos$prov_nac))
-    updateSelectizeInput(session,"provincias",choices = llenarProvincias())
+    updateSelectizeInput(session,"provincias",choices = provincias)
     nacidos
   })
   
   output$timeline <- renderHighchart({
-    highchart(type="stock")%>%
-      hc_title(text = "Nacimientos")
-      hc_add_series(nacimie)
+    nacimientos <- getData()
+    #highchart(type="stock")%>%
+    #  hc_title(text = "Nacimientos")
+    #  hc_add_series(nacimientos)
   })
   
 })
