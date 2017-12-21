@@ -143,6 +143,47 @@ ui = fluidPage(
 ...
 ```
 
+Mensaje de espera
+===
+
+```
+tags$div(conditionalPanel(condition="$('html').hasClass('shiny-busy')",
+                                                tags$div(id="loadmessageContainer",
+                                                         tags$div(id="loadmessage","Loading...",br(),tags$div(class="loader",""))
+                                                )
+                      )
+                      )
+```
+
+Descargar datos
+===
+
+ui.R
+
+```
+downloadButton("descargar", "Descargar datos")
+```
+
+server.R
+
+```
+output$descargar <- downloadHandler(
+    filename = "nacidos_vivos.csv",
+    content = function(file) {
+      write.csv(cargarDatos(), file)
+    }
+  )
+```
+
+Imprimir graficos
+===
+
+Usamos la opcion de highchar hc_export
+
+```
+hc_exporting(enabled=T)
+```
+
 Lecciones que aprendi ayer
 ===
 

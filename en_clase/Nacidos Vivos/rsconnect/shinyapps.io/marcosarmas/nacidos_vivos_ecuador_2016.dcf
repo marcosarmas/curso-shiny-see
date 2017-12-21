@@ -1,0 +1,13 @@
+name: nacidos_vivos_ecuador_2016
+title: Nacidos_Vivos_Ecuador_2016
+username:
+account: marcosarmas
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 250956
+bundleId: 1146787
+url: https://marcosarmas.shinyapps.io/nacidos_vivos_ecuador_2016/
+when: 1513887207.24489
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|ENV_2016.csv
